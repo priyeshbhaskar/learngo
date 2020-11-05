@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/golang/mock/gomock"
-	"github.com/sgreben/testing-with-gomock/match"
-	"github.com/sgreben/testing-with-gomock/mocks"
-	"github.com/sgreben/testing-with-gomock/user"
+	"github.com/priyeshbhaskar/learngo/match"
+	"github.com/priyeshbhaskar/learngo/mocks"
+	"github.com/priyeshbhaskar/learngo/user"
 )
 
 func TestUse(t *testing.T) {
@@ -19,9 +19,11 @@ func TestUse(t *testing.T) {
 	testUser := &user.User{Doer: mockDoer}
 
 	// Expect Do to be called once with 123 and "Hello GoMock" as parameters, and return nil from the mocked call.
-	mockDoer.EXPECT().DoSomething(123, "Hello GoMock").Return(nil).Times(1)
+	mockDoer.EXPECT().DoSomething(123, "Hello GoMock").Return("leo",nil).Times(1)
 
-	testUser.Use()
+	val,err :=testUser.Use()
+
+	fmt.Printf("%s , %s" , val,err.Error())
 }
 
 func TestUseReturnsErrorFromDo(t *testing.T) {
@@ -35,7 +37,7 @@ func TestUseReturnsErrorFromDo(t *testing.T) {
 	// Expect Do to be called once with 123 and "Hello GoMock" as parameters, and return dummyError from the mocked call.
 	mockDoer.EXPECT().DoSomething(123, "Hello GoMock").Return(dummyError).Times(1)
 
-	err := testUser.Use()
+	_,err := testUser.Use()
 
 	if err != dummyError {
 		t.Fail()
