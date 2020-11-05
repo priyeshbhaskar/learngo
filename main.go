@@ -2,17 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/priyeshbhaskar/learngo/hello"
 	"github.com/priyeshbhaskar/learngo/channels"
+	"github.com/priyeshbhaskar/learngo/hello"
 )
 
 
 func main() {
 
 	fmt.Println(hello.SayHello())
-
-	c := make(chan int)
-	c = Gen([]int{2, 3, 4, 5})
+	c := channels.GenNumber([]int{2, 3, 4, 5})
 
 	// Consume the output.
 	// Print 2,3,4,5
